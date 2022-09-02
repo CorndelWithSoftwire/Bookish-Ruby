@@ -1,0 +1,40 @@
+<h1 class="mb-4"><%= @book.title %></h1>
+
+<div class="d-flex mb-5 button-group">
+  <%= button_to 'Edit book', edit_book_path(@book), method: :get %>
+  <%= button_to 'Delete book', book_path(@book), method: :delete, data: { confirm: "Are you sure?" } %>
+</div>
+
+<div>
+  <h4 class="mb-4">Copies in stock:</h4>
+
+  <% if @copies.length >= 1 %>
+    <% for copy in @copies %>
+
+      <div class="card mb-3">
+
+        <h5 class="card-header">Copy <%= copy.id %></h5>
+
+        <div class="card-body pb-3">
+          <% if !copy.borrower.empty? %>
+            <p>Currently on loan to: <%= copy.borrower %></p>
+            <p>Due to be returned on: <%= copy.due_date %></p>
+          <% end %>
+
+          <div class="d-flex button-group">
+            <%= button_to 'Edit copy', edit_book_copy_path(@book, copy), method: :get %>
+            <%= button_to 'Delete copy', copy_path(copy), method: :delete, data: { confirm: "Are you sure?" } %>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+  <% else %>
+    <p class="mb-3">There are no copies of this book at the moment.</p>
+  <% end %>
+</div>
+
+<%= button_to 'Add a copy', new_book_copy_path(@book), method: :get %>
+<br>
+<%= link_to 'Back to Home', books_path %>

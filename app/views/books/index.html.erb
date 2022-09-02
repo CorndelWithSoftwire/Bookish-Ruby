@@ -1,0 +1,20 @@
+<h1 class="mb-4">Bookish Library</h1>
+
+<% for book in @books %>
+    <div class="card mb-3">
+      <h5 class="card-header"><%= link_to book.title, book_path(book) %></h5>
+
+      <div class="card-body pb-3">
+        <p>Author: <%= book.author %></p>
+        <p>ISBN: <%= book.ISBN %></p>
+      </div>
+    </div>
+  <% end %>
+
+<%= button_to 'Add a book', new_book_path, method: :get %>
+<br>
+<% if user_signed_in? %>
+  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Log in", new_user_session_path %>
+<% end %>

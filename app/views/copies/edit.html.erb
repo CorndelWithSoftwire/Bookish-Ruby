@@ -1,0 +1,11 @@
+<div class="basic-form">
+  <h1>Edit copy #<%= @copy.id %> of <%= @book.title %></h1>
+
+  <%= form_with model: [@book, @copy], local: true do |f| %>
+    <%= f.label :borrower %>
+    <%= f.text_field :borrower %>
+    <%= f.label :due_date %>
+    <%= f.text_field :due_date %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
